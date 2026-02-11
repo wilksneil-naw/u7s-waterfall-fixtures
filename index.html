@@ -699,11 +699,7 @@
                         <h1 className="text-3xl font-bold text-gray-900">U7's Waterfall</h1>
                         <p className="text-gray-600 mt-1">Generate and manage fixtures</p>
                       </div>
-                      <button onClick={() => setView('public')} className="flex items-center gap-2 px-4 py-2 bg-[#7c1229] text-white rounded-lg hover:bg-[#a01638]">
-                        <Eye size={20} />
-                        Preview Public View
-                      </button>
-                    </div>
+                                    </div>
                     {error && (
                       <div className={`mb-4 p-4 ${error.includes('Successfully') ? 'bg-[#7c1229]/5 border-green-200 text-green-700' : 'bg-red-50 border-red-200 text-red-700'} border rounded-lg`}>
                         {error}
@@ -830,8 +826,7 @@
                 <div className="max-w-2xl mx-auto">
                   <div className="flex items-center justify-between mb-3">
                     <h1 className="text-2xl font-bold">U7's Waterfall</h1>
-                    <button onClick={() => setView('admin')} className="px-3 py-1 bg-white text-[#7c1229] rounded-lg text-sm font-medium">Admin</button>
-                  </div>
+                                      </div>
                   <div className="relative">
                     <Search className="absolute left-3 top-3 text-[#7c1229]" size={20} />
                     <input type="text" placeholder="Search for your team..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-3 rounded-lg text-gray-900 text-lg" />
@@ -946,4 +941,5 @@
     </script>
 </body>
 </html>
+
 
