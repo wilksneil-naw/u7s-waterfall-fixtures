@@ -699,13 +699,13 @@
                         <h1 className="text-3xl font-bold text-gray-900">U7's Waterfall</h1>
                         <p className="text-gray-600 mt-1">Generate and manage fixtures</p>
                       </div>
-                      <button onClick={() => setView('public')} className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                      <button onClick={() => setView('public')} className="flex items-center gap-2 px-4 py-2 bg-[#7c1229] text-white rounded-lg hover:bg-[#a01638]">
                         <Eye size={20} />
                         Preview Public View
                       </button>
                     </div>
                     {error && (
-                      <div className={`mb-4 p-4 ${error.includes('Successfully') ? 'bg-green-50 border-green-200 text-green-700' : 'bg-red-50 border-red-200 text-red-700'} border rounded-lg`}>
+                      <div className={`mb-4 p-4 ${error.includes('Successfully') ? 'bg-[#7c1229]/5 border-green-200 text-green-700' : 'bg-red-50 border-red-200 text-red-700'} border rounded-lg`}>
                         {error}
                       </div>
                     )}
@@ -786,7 +786,7 @@
                         <h2 className="text-2xl font-bold text-gray-900">Generated Fixtures ({fixtures.length} matches)</h2>
                         <div className="flex gap-2">
                           <div className="text-sm text-gray-600">{teams.length} teams</div>
-                          <button onClick={downloadFixturesAsExcel} className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
+                          <button onClick={downloadFixturesAsExcel} className="flex items-center gap-2 px-4 py-2 bg-[#7c1229] text-white rounded-lg hover:bg-[#a01638]">
                             <Download size={18} />
                             Download Excel
                           </button>
@@ -826,20 +826,20 @@
 
           return (
             <div className="min-h-screen bg-gradient-to-b from-green-50 to-white">
-              <div className="bg-green-600 text-white p-4 sticky top-0 z-10 shadow-lg">
+              <div className="bg-[#7c1229] text-white p-4 sticky top-0 z-10 shadow-lg">
                 <div className="max-w-2xl mx-auto">
                   <div className="flex items-center justify-between mb-3">
                     <h1 className="text-2xl font-bold">U7's Waterfall</h1>
-                    <button onClick={() => setView('admin')} className="px-3 py-1 bg-white text-green-600 rounded-lg text-sm font-medium">Admin</button>
+                    <button onClick={() => setView('admin')} className="px-3 py-1 bg-white text-[#7c1229] rounded-lg text-sm font-medium">Admin</button>
                   </div>
                   <div className="relative">
-                    <Search className="absolute left-3 top-3 text-green-600" size={20} />
+                    <Search className="absolute left-3 top-3 text-[#7c1229]" size={20} />
                     <input type="text" placeholder="Search for your team..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full pl-10 pr-4 py-3 rounded-lg text-gray-900 text-lg" />
                   </div>
                   {searchTerm && (
                     <div className="mt-2 bg-white rounded-lg shadow-lg max-h-60 overflow-y-auto">
                       {filteredTeams.map(team => (
-                        <button key={team.id} onClick={() => { setSelectedTeam(team); setSearchTerm(''); }} className="w-full px-4 py-3 text-left hover:bg-green-50 border-b border-gray-100 text-gray-900">
+                        <button key={team.id} onClick={() => { setSelectedTeam(team); setSearchTerm(''); }} className="w-full px-4 py-3 text-left hover:bg-[#7c1229]/5 border-b border-gray-100 text-gray-900">
                           <div className="font-medium">{team.name}</div>
                           <div className="text-sm text-gray-600">Club: {team.club}</div>
                         </button>
@@ -857,7 +857,7 @@
                   </div>
                 ) : selectedTeam ? (
                   <div>
-                    <button onClick={() => setSelectedTeam(null)} className="mb-4 text-green-600 font-medium">← Back to all fixtures</button>
+                    <button onClick={() => setSelectedTeam(null)} className="mb-4 text-[#7c1229] font-medium">← Back to all fixtures</button>
                     <div className="bg-white rounded-lg shadow-lg p-4 mb-4">
                       <h2 className="text-xl font-bold text-gray-900">{selectedTeam.name}</h2>
                       <p className="text-gray-600">Club: {selectedTeam.club}</p>
@@ -869,7 +869,7 @@
                         return (
                           <div key={fixture.id} className="bg-white rounded-lg shadow p-4">
                             <div className="flex items-center justify-between mb-2">
-                              <span className="text-2xl font-bold text-green-600">{fixture.time}</span>
+                              <span className="text-2xl font-bold text-[#7c1229]">{fixture.time}</span>
                               <span className="text-lg font-medium text-gray-700">Match {idx + 1}</span>
                             </div>
                             <div className="flex items-center gap-2 mb-2">
@@ -919,7 +919,7 @@
                           {upcoming.map(f => (
                             <div key={f.id} className="bg-white rounded-lg shadow p-4">
                               <div className="flex items-center justify-between mb-2">
-                                <span className="text-xl font-bold text-green-600">{f.time}</span>
+                                <span className="text-xl font-bold text-[#7c1229]">{f.time}</span>
                                 <span className="flex items-center gap-1 font-medium text-gray-700">
                                   <MapPin size={16} />
                                   Pitch {f.pitch}
@@ -946,3 +946,4 @@
     </script>
 </body>
 </html>
+
