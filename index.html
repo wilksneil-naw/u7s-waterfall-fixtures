@@ -8,6 +8,8 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js"></script>
     <style>
         body { 
             margin: 0; 
@@ -1190,20 +1192,8 @@
             }
           };
 
-          const downloadClubPackPDF = async (clubName) => {
+          const downloadClubPackPDF = (clubName) => {
             try {
-              // Lazy-load jsPDF + autoTable from CDN
-              if (!window.jspdf) {
-                const s1 = document.createElement('script');
-                s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
-                await new Promise((resolve, reject) => { s1.onload = resolve; s1.onerror = reject; document.head.appendChild(s1); });
-              }
-              if (!window.jspdf_autotable) {
-                const s2 = document.createElement('script');
-                s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js';
-                await new Promise((resolve, reject) => { s2.onload = resolve; s2.onerror = reject; document.head.appendChild(s2); });
-              }
-
               const { jsPDF } = window.jspdf;
               const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
               const pageW = doc.internal.pageSize.getWidth();
@@ -1298,20 +1288,8 @@
             }
           };
 
-          const downloadTeamFixturePDF = async (team) => {
+          const downloadTeamFixturePDF = (team) => {
             try {
-              // Lazy-load jsPDF + autoTable from CDN
-              if (!window.jspdf) {
-                const s1 = document.createElement('script');
-                s1.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
-                await new Promise((resolve, reject) => { s1.onload = resolve; s1.onerror = reject; document.head.appendChild(s1); });
-              }
-              if (!window.jspdf_autotable) {
-                const s2 = document.createElement('script');
-                s2.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js';
-                await new Promise((resolve, reject) => { s2.onload = resolve; s2.onerror = reject; document.head.appendChild(s2); });
-              }
-
               const { jsPDF } = window.jspdf;
               const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
               const pageW = doc.internal.pageSize.getWidth();
