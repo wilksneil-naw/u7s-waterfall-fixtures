@@ -315,8 +315,7 @@ export const downloadTeamFixturePDF = async (team, fixtures, setPdfLoading) => {
     doc.setTextColor(150, 150, 150);
     doc.text('Generated ' + new Date().toLocaleDateString(), pageW / 2, finalY, { align: 'center' });
 
-    const safeName = team.name.replace(/[^a-zA-Z0-9]/g, '_');
-    doc.save(safeName + '_Fixtures.pdf');
+    window.open(doc.output('bloburi'), '_blank');
   } catch (err) {
     console.error(err);
     alert('Unable to generate PDF. Please try again or use a different browser.\n\n' + err.message);
