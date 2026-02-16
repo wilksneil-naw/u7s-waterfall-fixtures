@@ -1221,26 +1221,12 @@
             }
           };
 
-          const loadJsPDF = async () => {
-            if (window.jspdf && window.jspdf.jsPDF && typeof window.jspdf.jsPDF.API.autoTable === 'function') return;
-            const loadScript = (src) => new Promise((resolve, reject) => {
-              const s = document.createElement('script');
-              s.src = src;
-              s.onload = resolve;
-              s.onerror = () => reject(new Error('Failed to load ' + src));
-              document.head.appendChild(s);
-            });
-            if (!window.jspdf) {
-              await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js');
+          const downloadClubPackPDF = (clubName) => {
+            if (!window.jspdf || !window.jspdf.jsPDF || typeof window.jspdf.jsPDF.API.autoTable !== 'function') {
+              alert('PDF library is still loading. Please wait a moment and try again.');
+              return;
             }
-            if (!window.jspdf.jsPDF || typeof window.jspdf.jsPDF.API.autoTable !== 'function') {
-              await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.4/jspdf.plugin.autotable.min.js');
-            }
-          };
-
-          const downloadClubPackPDF = async (clubName) => {
             try {
-              await loadJsPDF();
               const { jsPDF } = window.jspdf;
               const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
               const pageW = doc.internal.pageSize.getWidth();
@@ -1335,10 +1321,13 @@
             }
           };
 
-          const downloadTeamFixturePDF = async (team) => {
+          const downloadTeamFixturePDF = (team) => {
+            if (!window.jspdf || !window.jspdf.jsPDF || typeof window.jspdf.jsPDF.API.autoTable !== 'function') {
+              alert('PDF library is still loading. Please wait a moment and try again.');
+              return;
+            }
             setPdfLoading(true);
             try {
-              await loadJsPDF();
               const { jsPDF } = window.jspdf;
               const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
               const pageW = doc.internal.pageSize.getWidth();
