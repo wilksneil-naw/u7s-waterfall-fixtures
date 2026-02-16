@@ -26,7 +26,7 @@ export default function PublicView(props) {
               <button onClick={() => props.setSelectedTeam(null)} className="text-white/90 hover:text-white font-medium text-sm">{'\u2190'} Back to all fixtures</button>
               <button onClick={() => downloadTeamFixturePDF(props.selectedTeam, props.fixtures, props.setPdfLoading)} disabled={props.pdfLoading} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors text-sm font-medium ${props.pdfLoading ? 'bg-white/10 cursor-wait' : 'bg-white/20 hover:bg-white/30'}`}>
                 {props.pdfLoading ? <RefreshCw size={16} className="animate-spin" /> : <Download size={16} />}
-                <span>{props.pdfLoading ? 'Generating...' : 'Download PDF'}</span>
+                <span>{props.pdfLoading ? 'Generating...' : 'View PDF'}</span>
               </button>
             </div>
           ) : (
