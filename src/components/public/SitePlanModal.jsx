@@ -1,27 +1,42 @@
-import React, { useRef, useCallback } from 'react';
+import React, { useRef, useEffect, useCallback } from 'react';
 import { MapPin, X, ZoomIn, ZoomOut } from '../icons';
 import sitePlanImg from '/site-plan.png?url';
 
 export default function SitePlanModal({ showSitePlan, setShowSitePlan, sitePlanZoom, setSitePlanZoom }) {
   const lastDistRef = useRef(null);
+  const scrollRef = useRef(null);
+  const zoomRef = useRef(setSitePlanZoom);
+  zoomRef.current = setSitePlanZoom;
 
-  const handleTouchMove = useCallback((e) => {
-    if (e.touches.length === 2) {
-      e.preventDefault();
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      const dist = Math.hypot(dx, dy);
-      if (lastDistRef.current !== null) {
-        const scale = dist / lastDistRef.current;
-        setSitePlanZoom(z => Math.min(3, Math.max(1, z * scale)));
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    function onTouchMove(e) {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        if (lastDistRef.current !== null) {
+          const scale = dist / lastDistRef.current;
+          zoomRef.current(z => Math.min(3, Math.max(1, z * scale)));
+        }
+        lastDistRef.current = dist;
       }
-      lastDistRef.current = dist;
     }
-  }, [setSitePlanZoom]);
 
-  const handleTouchEnd = useCallback(() => {
-    lastDistRef.current = null;
-  }, []);
+    function onTouchEnd() {
+      lastDistRef.current = null;
+    }
+
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd);
+    return () => {
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [showSitePlan]);
 
   if (!showSitePlan) return null;
 
@@ -38,10 +53,9 @@ export default function SitePlanModal({ showSitePlan, setShowSitePlan, sitePlanZ
           </button>
         </div>
         <div
+          ref={scrollRef}
           className="overflow-auto"
-          style={{WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain', touchAction: sitePlanZoom > 1 ? 'pan-x pan-y' : 'manipulation'}}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleTouchEnd}
+          style={{WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain', touchAction: 'pan-x pan-y'}}
         >
           <img src={sitePlanImg} alt="Site plan showing 16 pitches in a 4x4 grid, colour-coded by zone A through H" style={{width: `${sitePlanZoom * 100}%`, height: 'auto', display: 'block'}} draggable="false" />
         </div>
